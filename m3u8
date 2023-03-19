@@ -1,0 +1,43 @@
+import requests
+import urllib.parse
+import tkinter as tk
+
+class M3u8CheckerApp(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.label = tk.Label(self, text="输入m3u8链接（每行一个）：")
+        self.label.pack()
+
+        self.textbox = tk.Text(self, height=10, width=50)
+        self.textbox.pack()
+
+        self.check_button = tk.Button(self, text="检查链接", command=self.check_links)
+        self.check_button.pack()
+
+        self.result_label = tk.Label(self, text="")
+        self.result_label.pack()
+
+    def check_links(self):
+        links = self.textbox.get("1.0", "end").splitlines()
+        results = []
+        for link in links:
+            try:
+                response = requests.get(link)
+                response.raise_for_status()
+                for line in response.text.splitlines():
+                    if not line.startswith("#"):
+                        media_url = urllib.parse.urljoin(link, line)
+                        media_response = requests.get(media_url)
+                        media_response.raise_for_status()
+                results.append(f"{link}: 可用")
+            except (requests.exceptions.RequestException, requests.exceptions.HTTPError):
+                results.append(f"{link}: 不可用")
+        self.result_label.configure(text="\n".join(results))
+
+root = tk.Tk()
+app = M3u8CheckerApp(master=root)
+app.mainloop()
