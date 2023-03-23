@@ -1,5 +1,7 @@
 # M3u8检查器
 
+![visitor badge](https://visitor-badge.vercel.app/p/Guyungy.M3u8)
+
 ### 功能
 检测M3U8链接是否失效，并清理失效链接
 
