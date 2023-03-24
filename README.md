@@ -13,8 +13,6 @@
 requests
 
 ### 测试地址
-http://ivi.bupt.edu.cn/hls/btv1hd.m3u8 
- 
-http://ivi.bupt.edu.cn/hls/zjhd.m3u8 
- 
+http://ivi.bupt.edu.cn/hls/btv1hd.m3u8
+http://ivi.bupt.edu.cn/hls/zjhd.m3u8
 http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8 
